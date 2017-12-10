@@ -1,15 +1,20 @@
 package web;
 
 import entity.Request;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+import process.Processor;
 
 import java.util.List;
 
 @RestController
 public class RequestController {
 
+    @Autowired
+    Processor processor;
+
     @RequestMapping(value="/create", method= RequestMethod.POST, produces="application/json", consumes="application/json")
-    public void createStudent(@RequestBody Request request)
+    public void createRequest(@RequestBody Request request)
     {
 
     }

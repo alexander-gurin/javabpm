@@ -1,5 +1,5 @@
 
-create table requests
+CREATE TABLE IF NOT EXISTS requests
 (
    id integer not null,
    name varchar(255) not null,

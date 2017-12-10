@@ -27,6 +27,14 @@ public class RequestDao implements Query {
 
     }
 
+    public List<Request> getAllRequests(){
+        return jdbcTemplate.query(GET_ALL_REQUESTS, (rs, rowNum) -> new Request(rs.getLong("id"),
+                        rs.getString("name"),
+                        rs.getDate("start_date"),
+                        rs.getDate("end_dte"),
+                        rs.getInt("status")));
+    }
+
     public void updateRequestStatus(Long id, Integer status){
         jdbcTemplate.update(UPDATE_REQUEST_STATUS, status, id);
     }
