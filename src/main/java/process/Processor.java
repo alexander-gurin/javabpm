@@ -16,17 +16,33 @@ public class Processor {
     @Autowired
     RequestDao dao;
 
-    public void createNewRequest(String customer, Date startDate, Date endDate){
-        Request flag = new Request();
+    public void createNewRequest(Request request) throws Exception {
 
         List<Request> existsReqs = dao.getAllRequests();
-        flag = existsReqs.stream().filter(
-                 (Request e) -> e.getStartDate().before(endDate) && e.getEndDate().after(startDate))
-                 .findAny().orElse(null);
+
+        Date dt  = new Date();
+        Request flag = existsReqs.stream()
+                  .filter((Request e) -> e.getStartDate().before(request.getEndDate()) && e.getEndDate().after(request.getStartDate())
+                           && dt.before(request.getStartDate()))
+                  .findAny().orElse(null);
 
         if (flag == null) {
-            dao.createRequest(customer, startDate, endDate);
+            dao.createRequest(request.getId(),request.getCustomer(), request.getStartDate(), request.getEndDate());
+        } else {
+            throw new Exception("Bad date borders");
         }
 
+    }
+
+    public List<Request> getRequestsByCustomer(String customer) {
+        return dao.getRequestByCustomer(customer);
+    }
+
+    public void updateStatus (Request request) {
+        dao.updateRequestStatus(request.getId(), request.getStatus());
+    }
+
+    public void deleteByCustomer(String customer){
+        dao.deleteRequestByCustomer(customer);
     }
 }

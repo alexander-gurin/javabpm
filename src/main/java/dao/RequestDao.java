@@ -13,15 +13,15 @@ public class RequestDao implements Query {
     @Autowired
     private JdbcTemplate jdbcTemplate;
 
-    public void createRequest(String customer, Date startDate, Date endDate){
-        jdbcTemplate.update(CREATE_REQUEST, customer, startDate, endDate);
+    public void createRequest(Long id, String customer, Date startDate, Date endDate){
+        jdbcTemplate.update(CREATE_REQUEST, id, customer, startDate, endDate);
     }
 
     public List<Request> getRequestByCustomer(String customer){
         return jdbcTemplate.query(GET_REQUESTS_BY_CUSTOMER, (rs, rowNum) -> new Request(rs.getLong("id"),
                                                                                         rs.getString("name"),
                                                                                         rs.getDate("start_date"),
-                                                                                        rs.getDate("end_dte"),
+                                                                                        rs.getDate("end_date"),
                                                                                         rs.getInt("status")),
                 customer);
 
@@ -31,7 +31,7 @@ public class RequestDao implements Query {
         return jdbcTemplate.query(GET_ALL_REQUESTS, (rs, rowNum) -> new Request(rs.getLong("id"),
                         rs.getString("name"),
                         rs.getDate("start_date"),
-                        rs.getDate("end_dte"),
+                        rs.getDate("end_date"),
                         rs.getInt("status")));
     }
 
