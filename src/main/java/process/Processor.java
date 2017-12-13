@@ -38,6 +38,10 @@ public class Processor {
         return dao.getRequestByCustomer(customer);
     }
 
+    public List<Request> getAllRequests() {
+        return dao.getAllRequests();
+    }
+
     public void updateStatus (Request request) {
         dao.updateRequestStatus(request.getId(), request.getStatus());
     }

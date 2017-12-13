@@ -24,6 +24,12 @@ public class RequestController {
         return processor.getRequestsByCustomer(customer);
     }
 
+    @RequestMapping(value="/allrequests",produces="application/json", method=RequestMethod.GET)
+    public List<Request> getAllRequests()
+    {
+        return processor.getAllRequests();
+    }
+
     @RequestMapping(value="/update", method=RequestMethod.PUT, produces="application/json", consumes="application/json")
     public void updateStatus(@RequestBody Request request)
     {
