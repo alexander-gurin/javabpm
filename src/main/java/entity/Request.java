@@ -1,8 +1,9 @@
 package entity;
 
+import java.io.Serializable;
 import java.util.Date;
 
-public class Request {
+public class Request implements Serializable{
     Long id;
     String customer;
     Date startDate;

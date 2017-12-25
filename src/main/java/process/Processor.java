@@ -39,7 +39,7 @@ public class Processor {
     }
 
     public List<Request> getAllRequests() {
-        return dao.getAllRequests();
+        return dao.getAllRequests() ;
     }
 
     public void updateStatus (Request request) {
